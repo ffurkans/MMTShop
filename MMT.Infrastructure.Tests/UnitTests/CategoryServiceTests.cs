@@ -81,7 +81,7 @@ namespace MMT.Infrastructure.Tests.UnitTests
 
 
 		[Test]
-		public void GetAllCategories_OverlappedSKU_Fail()
+		public void GetAllCategories_Success()
 		{
 			// Arrange
 			var categoryService = new CategoryService(_categoryRepositoryMock.Object);
