@@ -105,3 +105,12 @@ FROM Product p
 JOIN Category c ON p.SKU >= c.SKUStart AND p.SKU < c.SKUEnd
 WHERE p.IsFeatured = 1
 AND c.CanBeFeatured = 1
+
+GO
+
+CREATE PROC uspGetProductsByCategory
+@IdCategory VARCHAR(36)
+AS
+SELECT p.* 
+FROM Product p
+JOIN Category c ON p.SKU >= c.SKUStart AND p.SKU < c.SKUEnd AND c.Id = @IdCategory

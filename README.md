@@ -42,12 +42,19 @@ General:
 - Adding new category checkes SKU range if it overlaps with other categories.
 - We could add DomainEvents, but currently there is no business case for that.
 - Currency field is not added since it will always be GBP
+- Category SKUStart and SKUEnd columns define the range of the SKU. (SKUStared included, SKUEnd excluded)
 - Specification usage > CategorySKURangeOverlapSpec
 - "uspGetFeaturedProducts" Stored Procedure is not used in project but the creation script added to MMTShopDB-Scripts.sql
-	CREATE PROC [dbo].[uspGetFeaturedProducts]
+- CREATE PROC [dbo].[uspGetFeaturedProducts]
 	AS
 	SELECT p.* 
 	FROM Product p
 	JOIN Category c ON p.SKU >= c.SKUStart AND p.SKU < c.SKUEnd
 	WHERE p.IsFeatured = 1
 	AND c.CanBeFeatured = 1
+- CREATE PROC uspGetProductsByCategory
+	@IdCategory VARCHAR(36)
+	AS
+	SELECT p.* 
+	FROM Product p
+	JOIN Category c ON p.SKU >= c.SKUStart AND p.SKU < c.SKUEnd AND c.Id = @IdCategory
